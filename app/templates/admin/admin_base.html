@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+
+        <style>
+          .navbar {
+            position: fixed;
+          }
+          @import 'https://fonts.googleapis.com/css?family=Open+Sans:600,700';
+
+* {font-family: 'Open Sans', sans-serif;}
+
+.rwd-table {
+margin: auto;
+min-width: 300px;
+max-width: 100%;
+border-collapse: collapse;
+}
+
+.rwd-table tr:first-child {
+border-top: none;
+background: #428bca;
+color: #fff;
+}
+
+.rwd-table tr {
+border-top: 1px solid #ddd;
+border-bottom: 1px solid #ddd;
+background-color: #f5f9fc;
+}
+
+.rwd-table tr:nth-child(odd):not(:first-child) {
+background-color: #ebf3f9;
+}
+
+.rwd-table th {
+display: none;
+}
+
+.rwd-table td {
+display: block;
+}
+
+.rwd-table td:first-child {
+margin-top: .5em;
+}
+
+.rwd-table td:last-child {
+margin-bottom: .5em;
+}
+
+.rwd-table td:before {
+content: attr(data-th) ": ";
+font-weight: bold;
+width: 120px;
+display: inline-block;
+color: #000;
+}
+
+.rwd-table th,
+.rwd-table td {
+text-align: left;
+}
+
+.rwd-table {
+color: #333;
+border-radius: .4em;
+overflow: hidden;
+}
+
+.rwd-table tr {
+border-color: #bfbfbf;
+}
+
+.rwd-table th,
+.rwd-table td {
+padding: .5em 1em;
+}
+@media screen and (max-width: 601px) {
+.rwd-table tr:nth-child(2) {
+  border-top: none;
+}
+}
+@media screen and (min-width: 600px) {
+.rwd-table tr:hover:not(:first-child) {
+  background-color: #d8e7f3;
+}
+.rwd-table td:before {
+  display: none;
+}
+.rwd-table th,
+.rwd-table td {
+  display: table-cell;
+  padding: .25em .5em;
+}
+.rwd-table th:first-child,
+.rwd-table td:first-child {
+  padding-left: 0;
+}
+.rwd-table th:last-child,
+.rwd-table td:last-child {
+  padding-right: 0;
+}
+.rwd-table th,
+.rwd-table td {
+  padding: 1em !important;
+}
+}
+
+
+/* THE END OF THE IMPORTANT STUFF */
+
+/* Basic Styling */
+body {
+background: #4B79A1;
+background: -webkit-linear-gradient(to left, #4B79A1 , #283E51);
+background: linear-gradient(to left, #4B79A1 , #283E51);        
+}
+h1 {
+text-align: center;
+font-size: 2.4em;
+color: #f2f2f2;
+}
+.container {
+display: block;
+text-align: center;
+}
+h3 {
+display: inline-block;
+position: relative;
+text-align: center;
+font-size: 1.5em;
+color: #cecece;
+}
+h3:before {
+content: "\25C0";
+position: absolute;
+left: -50px;
+-webkit-animation: leftRight 2s linear infinite;
+animation: leftRight 2s linear infinite;
+}
+h3:after {
+content: "\25b6";
+position: absolute;
+right: -50px;
+-webkit-animation: leftRight 2s linear infinite reverse;
+animation: leftRight 2s linear infinite reverse;
+}
+@-webkit-keyframes leftRight {
+0%    { -webkit-transform: translateX(0)}
+25%   { -webkit-transform: translateX(-10px)}
+75%   { -webkit-transform: translateX(10px)}
+100%  { -webkit-transform: translateX(0)}
+}
+@keyframes leftRight {
+0%    { transform: translateX(0)}
+25%   { transform: translateX(-10px)}
+75%   { transform: translateX(10px)}
+100%  { transform: translateX(0)}
+}
+
+/*
+  Don't look at this last part. It's unnecessary. I was just playing with pixel gradients... Don't judge.
+*/
+/*
+@media screen and (max-width: 601px) {
+.rwd-table tr {
+  background-image: -webkit-linear-gradient(left, #428bca 137px, #f5f9fc 1px, #f5f9fc 100%);
+  background-image: -moz-linear-gradient(left, #428bca 137px, #f5f9fc 1px, #f5f9fc 100%);
+  background-image: -o-linear-gradient(left, #428bca 137px, #f5f9fc 1px, #f5f9fc 100%);
+  background-image: -ms-linear-gradient(left, #428bca 137px, #f5f9fc 1px, #f5f9fc 100%);
+  background-image: linear-gradient(left, #428bca 137px, #f5f9fc 1px, #f5f9fc 100%);
+}
+.rwd-table tr:nth-child(odd) {
+  background-image: -webkit-linear-gradient(left, #428bca 137px, #ebf3f9 1px, #ebf3f9 100%);
+  background-image: -moz-linear-gradient(left, #428bca 137px, #ebf3f9 1px, #ebf3f9 100%);
+  background-image: -o-linear-gradient(left, #428bca 137px, #ebf3f9 1px, #ebf3f9 100%);
+  background-image: -ms-linear-gradient(left, #428bca 137px, #ebf3f9 1px, #ebf3f9 100%);
+  background-image: linear-gradient(left, #428bca 137px, #ebf3f9 1px, #ebf3f9 100%);
+}
+}*/
+      </style>
+
+      <style>
+          .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+          }
+          
+          .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+          
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+          }
+          
+          .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+          }
+          
+          input:checked + .slider {
+            background-color: #2196F3;
+          }
+          
+          input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+          }
+          
+          input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+          }
+          
+          /* Rounded sliders */
+          .slider.round {
+            border-radius: 34px;
+          }
+          
+          .slider.round:before {
+            border-radius: 50%;
+          }
+          </style>
+
+        {% block css %}{% endblock css %}
+
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+            <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css" rel="stylesheet"></link>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+                integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class= "bg-body-tertiary sticky-top">
+        <ul class="nav nav-tabs justify-content-center">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/admin_dashboard/">{{request.user.email}}</a>
+            </li>
+            {% comment %} <li class="nav-item">
+              <a class="nav-link" href={% url 'index' %}>Home</a>
+            </li>  {% endcomment %}
+            <li class="nav-item">
+              <a class="nav-link" href={% url 'admin_side_ApplicationsPage' %}>Applications</a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" href={% url 'admin_side_Applicant' %}>Applicants</a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" href={% url 'admin_side_AddJob' %}>AddJob</a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="/logout/">Logout</a>
+            </li>  
+            <li class="nav-item">
+              <a class="nav-link" href={% url 'index' %}>App-HomePage</a>
+            </li>          
+          </ul>
+        </nav>
+
+{% block body %}{% endblock body %}
+
+{% block scriptInBody %}{% endblock scriptInBody %}
+    </body>
+</html>

@@ -1,0 +1,101 @@
+{% extends 'admin/admin_base.html' %}
+{% block css %}{% endblock css %}
+
+{% block body %}
+            
+{% for msg in messages %}
+    {% if request.user.is_authenticated %} <!--logged In-->
+    <div class="alert alert-primary" role="alert">
+        {{request.user}} , {{msg}} 
+    </div>
+    {% else %}<!--logged In-->
+    <div class="alert alert-primary" role="alert">
+        {{msg}} ...  you can <a href="/login/" class="alert-link">LOGIN</a> again
+    </div>
+    {% endif %}
+{% endfor %} 
+
+<script>
+    // suppose the `id` attribute of element is `message_container`.
+    var message_ele = document.querySelector(".alert");
+    setTimeout(function(){ 
+        message_ele.style.display = "none"; 
+    }, 3000);
+    // Timeout is 3 sec, you can change it
+</script>
+
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+<div class="container">
+    
+    <h1 class="text-white ">Users</h1>
+    <table class="rwd-table">
+        <tbody>
+            <tr>
+                <th></th>
+                <th>username</th>
+                <th>email</th>
+                <th>first_name</th>
+                <th>lastname</th>
+                <th>phone_number</th>
+                <th>staff_status</th>
+                <th>active_status</th>
+                <th>action</th>
+            </tr>
+                  {% for jobseeker in jobseekers %}
+                  <tr>
+                      <td></td>
+                      <td>
+                          {{jobseeker.username}}
+                    </td>
+                    <td>
+                        {{jobseeker.email}}
+                    </td>
+                    <td>
+                        {{jobseeker.first_name}}
+                    </td>
+                    <td>
+                        {{jobseeker.last_name}}
+                    </td>
+                    <td>
+                        {{jobseeker.phone_number}}
+                    </td>
+                    <td>
+                        {{jobseeker.is_staff}}
+                    </td>
+                    <td>
+                        {{jobseeker.is_active}}
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_user' jobseeker.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this applicant?')">Delete</a>
+                        <a class="btn btn-warning" href="/admin_side_EditUser/{{jobseeker.id}}/">Edit</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        <br/>
+        <br/>
+    </form>       
+{% endblock body %}
+        
+{% block scriptInBody %}
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script> <!-- Import Jquery Here-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#checkbox').change(function() {
+            $.post("/toggle/", {
+                id: '{{jobseekers.id}}', 
+                isworking: this.checked, 
+                csrfmiddlewaretoken: '{{ csrf_token }}' 
+            });
+        });
+    }); 
+    </script>
+{% endblock scriptInBody %}
+        

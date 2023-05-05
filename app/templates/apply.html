@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} application for {{job.jobname}} {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+
+<div class="container mt-2 mb-3">
+  <div class="col">
+    
+    {% for app in application %}{% endfor %}
+    <div class="col-lg-4 my-4">
+      <div class="card shadow align-items-center" style="width: auto; height: auto;">
+        <div class="card-body">
+          <h5 class="card-title">{{application.name }} apply for {{application.jobname}}</h5>
+          <hr>
+          <h4 style="display: inline-block; float: center;">&nbsp;₹ {{application.}}</h4>
+          <h4 style="display: inline-block; float: center;">&nbsp;{{job.description}}</h4>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+</div> 
+{% endblock %}
+{% block js %}
+<script>
+  {% if alert %}
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  
+  Toast.fire({
+    icon: 'success',
+    title: 'we will contact you soon'
+  })
+  {% endif %}
+
+  function loginRequiredAlert(){
+
+}
+</script>
+{% endblock %}
+

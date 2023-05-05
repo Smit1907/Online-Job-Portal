@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Online Shopping {% endblock %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+
+
+{% for msg in messages %}
+{% if request.user.is_authenticated %} <!--logged In-->
+<div class="alert alert-primary" role="alert">
+  {{request.user}} , {{msg}} 
+</div>
+{% else %}<!--logged In-->
+<div class="alert alert-primary" role="alert">
+  {{msg}} ...  you can <a href="/login/" class="alert-link">LOGIN</a> again
+</div>
+{% endif %}
+{% endfor %} 
+
+
+
+<script>
+// suppose the `id` attribute of element is `message_container`.
+var message_ele = document.querySelector(".alert");
+setTimeout(function(){ 
+   message_ele.style.display = "none"; 
+}, 3000);
+// Timeout is 3 sec, you can change it
+</script>
+
+
+
+
+<div class="container mt-2 mb-3">
+  <div class="col">
+
+
+{% for application in applied_jobs %}
+{% if application.jobseeker == request.user  %}
+    <div class="col-lg-4 my-4">
+      <div class="card shadow bg-dark align-items-center" style="width: auto; height: auto;">
+        {% comment %} <a href="/job_view/{{job.id}}/" style="text-decoration:none"> {% endcomment %}
+        <div class="card-body">
+          <h4 class="card-title" style="color:White;" >{{application.job}}</h4>
+          <hr>
+          <h6 style="display: inline-block; float: center; color:White;">Company : {{application.job.company}}</h6><br>
+          <h6 style="display: inline-block; float: center; color:White;">Pay : ₹ {{application.job.pay}}</h6>
+        </div>
+      {% comment %} </a> {% endcomment %}
+      </div>
+    </div>
+    {% endif %}    
+{% endfor %}   
+  </div>
+
+
+</div> 
+{% endblock %}
+{% block js %}
+
+
+
+
+
+<script>
+{% if alert %}
+  {% comment %} alert("Logout Sucessfull.") {% endcomment %}
+
+
+
+  {% comment %} deleteProductAlert() {% endcomment %}
+  {% comment %} window.location.href = '/' {% endcomment %}
+{% endif %}
+
+
+
+
+
+
+function LogoutAlert(){
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
+  Toast.fire({
+    icon: 'success',
+    title: 'logout successfully'
+  })
+}
+
+function loginPopUpAlert() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+
+$(".close").click(function() {
+  $(this)
+    .parent(".alert")
+    .fadeOut();
+});
+
+</script>
+
+{% endblock %}

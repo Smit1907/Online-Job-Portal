@@ -1,0 +1,89 @@
+{% extends 'admin/admin_base.html' %}
+{% block css %}<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">{% endblock css %}
+
+{% block body %}
+            
+{% for msg in messages %}
+    {% if request.user.is_authenticated %} <!--logged In-->
+    <div class="alert alert-primary" role="alert">
+        {{request.user}} , {{msg}} 
+    </div>
+    {% else %}<!--logged In-->
+    <div class="alert alert-primary" role="alert">
+        {{msg}} ...  you can <a href="/login/" class="alert-link">LOGIN</a> again
+    </div>
+    {% endif %}
+{% endfor %} 
+
+<script>
+    // suppose the `id` attribute of element is `message_container`.
+    var message_ele = document.querySelector(".alert");
+    setTimeout(function(){ 
+        
+        message_ele.style.display = "none"; 
+    }, 3000);
+    // Timeout is 3 sec, you can change it
+</script>
+
+
+
+
+<div class="container">
+    <h1 class="text-white">Applicants</h1>
+    <table class="rwd-table">
+        <tbody>
+            <tr>
+                <th></th>
+                <th>username</th>
+                <th>email</th>
+                <th>first_name</th>
+                <th>lastname</th>
+                <th>Job</th>
+                <th>CVs</th>
+                <th>Aproved</th>
+                <th >Action</th>
+                <th></th>
+              </tr>
+                  {% for application in applications %}
+                  <tr>
+                    <td></td>
+                    <td>
+                          {{application.jobseeker.username}}
+                    </td>
+                    <td>
+                          {{application.jobseeker.email}}
+                    </td>
+                    <td>
+                          {{application.jobseeker.first_name}}
+                    </td>
+                    <td>
+                          {{application.jobseeker.last_name}}
+                    </td>
+                    <td>
+                        {{application.job.jobname}}
+                    </td>
+                    <td>
+                        <a href="{{application.file.url}}" target="_blank" style = "color: black;"><i class="fa fa-eye"></i></a>
+                        <a href="{{application.file.url}}" target="_blank" style = "color: navy;" download><i class="fa fa-download" aria-hidden="true"></i></a>
+                  </td>
+                    <td>
+                      {{application.approve}}
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_application' application.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this applicant?')">Delete</a>
+                    </td>
+                    <td></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+            <br/>
+            <br/>
+        </div>
+        
+{% endblock body %}
+        
+{{% block scriptInBody %}
+
+{% endblock scriptInBody %}}
+        

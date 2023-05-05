@@ -1,0 +1,60 @@
+{% extends 'admin/admin_base.html' %}
+{% block css %}<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock css %}
+
+{% block body %}
+        <form method = "POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div align="center">
+            <h1 style="color: azure">Edit User</h1>
+            <h3 style="color: azure">{{jobseeker.email}}</h3>
+            <br/>
+            <br/>
+        <label style="color: azure">username</label>
+        <input type="text" name="username" id="username" value={{jobseeker.username}} required><br/>
+
+        <label style="color: azure">first_name</label>
+        <input type="text" name="first_name" id="first_name" value={{jobseeker.first_name}} required><br/>
+
+        <label style="color: azure">last_name</label>
+        <input type="text" name="last_name" id="last_name" value={{jobseeker.last_name}} required><br/>
+
+        <label style="color: azure">email</label>
+        <input type="text" name="email" id="email" value={{jobseeker.email}} maxlength="100" required><br/>
+
+        <label style="color: azure">phone_number</label>
+        <input type="text" name="phone_number" id="phone_number" value={{jobseeker.phone_number}} required><br/>
+        
+        <label style="color: azure">is_staff</label>
+        <select name="is_staff" id="is_staff">
+            <option value={{jobseeker.is_staff}}>now: {{jobseeker.is_staff}}</option>
+            <hr>
+            <option value="True">True</option>
+            <option value="False">False</option>
+        </select><br/>
+
+        <label style="color: azure">is_active</label>
+        <select name="is_active" id="is_active">
+            <option value={{jobseeker.is_active}}>now: {{jobseeker.is_active}}</option>
+            <hr>
+            <option value="True">True</option>
+            <option value="False">False</option>
+        </select>
+
+        <input type="submit" class="btn btn-danger">
+        {% comment %} <input type="submit"> {% endcomment %}
+        </form>
+        <script src="" async defer></script>
+
+{% endblock body %}
+{% block scriptInBody %}
+<script>
+    {% if alertForAlreadyExistEmail %}
+    alert("user email is already exist!!!");
+    document.location = "/admin_side_EditUser/{{jobseeker.id}}/"
+    {% endif %}
+</script>
+{% endblock scriptInBody %}
+
+    {% comment %} </body>
+</html> {% endcomment %}

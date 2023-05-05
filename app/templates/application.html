@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Application for {{job.jobname}} {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="container py-2 mt-3">
+    <h2>Application for {{job.jobname}}</h2>
+
+    <form method="post" enctype="multipart/form-data" onsubmit="return Checkfiles(this)">
+      {% csrf_token %}
+
+      {% comment %} {% for jobs in job %}
+      <h1>{{jobs.jobname}}</h1>
+      {% endfor %} {% endcomment %}
+
+ <div class="form-group mt-2">
+   <label>Name</label>
+   <input type="text" class="form-control mt-2" id="name" name="name" value="{{request.user.first_name}} {{request.user.last_name}}" required>
+  </div>
+  <div class="form-group mt-2">
+   <label>Email</label>
+   <input type="email" class="form-control mt-2" id="email" name="email" value="{{request.user.email}}" required>
+  </div> 
+  <div class="form-group mt-2">
+     <label>Phone</label>
+     <input type="number" class="form-control mt-2" id="phone" name="phone" value="{{user.phone_number}}" required>
+   </div> 
+   <div class="form-group mt-2">
+    <label>Write about your self in brife</label>
+    <textarea class="form-control mt-2" id="desc" name="desc" rows="3" required></textarea>
+  </div>
+ <div class="form-group mt-2">
+   <label>Jobname</label>
+  <input type="text" class="form-control mt-2" id="jobname" name="jobname" value="{{job.jobname}}" readonly> 
+   {% comment %} <select name="job" id="job">
+   {% for jobs in job %}
+    <option>{{jobs.jobname}}</option>
+    {% endfor %} 
+  </select> {% endcomment %}
+  <div class="form-group">
+  <div class="form-group mt-2">
+   <label>upload your CV</label>
+   <input type="file" id="file" name="file" accept="application/pdf"/>
+ </div> 
+ <button type="submit" style="background-color: #8c5d4f; color: white; width: 8rem;" class="btn mt-4">Submit</button>
+</form>
+{% endblock %}
+{% block js %}
+<script>
+  {% if alert %}
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  
+  Toast.fire({
+    icon: 'success',
+    title: 'we will contact you soon'
+  })
+  {% endif %}
+
+  function loginRequiredAlert(){
+
+}
+</script>
+
+<script>
+  function Checkfiles()
+  {
+  var fup = document.getElementById('file');
+  var resume = fup.value;
+  var ext = resume.substring(resume.lastIndexOf('.') + 1);
+  if(ext == "pdf" )
+  {
+  return true;
+  } 
+  else
+  {
+  alert("Upload pdf files only");
+  fup.focus();
+  return false;
+  }
+  }
+
+</script>
+
+<script>
+  var myFile="";
+
+
+$('#file').on('change',function(){
+
+  myFile = $("#file").val();
+    console.log(myFile);
+  var upld = myFile.split('.').pop();
+  if(upld!='pdf'){
+    alert("Only PDF are allowed")
+  } 
+})
+</script>
+{% endblock %}
+
+{% comment %} else{
+  alert("Only PDF are allowed")
+  myFile = Null
+} {% endcomment %}

@@ -1,0 +1,59 @@
+{% extends 'admin/admin_base.html' %}
+{% block css %}<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock css %}
+
+{% block body %}
+        <form method = "POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label style="color: azure">jobname</label>
+        <input type="text" name="jobname" id="jobname" value={{job.jobname}} required><br/>
+
+        <label style="color: azure">company</label>
+        <input type="text" name="company" id="company" value={{job.company}} required><br/>
+
+        <label style="color: azure">description</label>
+        <textarea type="text" name="description" id="description"  required>{{job.description}}</textarea><br/>
+
+        <label style="color: azure">pay</label>
+        <input type="text" name="pay" id="pay" value={{job.pay}} required><br/>
+        
+        <label style="color: azure">address</label>
+        <input type="text" name="address" id="address" value={{job.address}} required><br/>
+
+        <label style="color: azure">start date</label>
+        <input type="date" name="sdate" id="sdate" value={{job.application_start_date|date:'Y-m-d'}} required><br/>
+        
+        <label style="color: azure">end date</label>
+        <input type="date" name="edate" id="edate" value={{job.application_end_date|date:'Y-m-d'}} required><br/>
+        
+        <input type="submit" class="btn btn-danger">
+        {% comment %} <input type="submit"> {% endcomment %}
+        </form>
+        <script src="" async defer></script>
+
+{% endblock body %}
+{% block scriptInBody %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script>
+<script>
+    {% if alert %}
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'error',
+        title: 'please select Date Carefully!!'
+      })
+    {% endif %}
+</script>
+{% endblock scriptInBody %}
+    {% comment %} </body>
+</html> {% endcomment %}
